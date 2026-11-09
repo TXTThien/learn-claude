@@ -51,10 +51,15 @@ cứng: `process_refund` chỉ chạy được sau khi `get_customer` đã xác 
 > ngưỡng → escalation.
 
 ### Milestone 4 (Ch.4 — MCP-style error handling)
+**Lưu ý phạm vi:** milestone này KHÔNG yêu cầu dựng MCP server thật (process riêng, giao thức
+MCP, `.mcp.json`...) — chỉ mượn đúng *quy ước định dạng lỗi* mà MCP dùng (`isError`,
+`errorCategory`, `isRetryable`), áp dụng vào tool tự viết trong chính project Node này. Dựng
+MCP server thật là bài tập mở rộng riêng, không bắt buộc cho milestone.
+
 Mỗi tool khi fail trả về `{"isError": true, "errorCategory": "transient|validation|business",
 "isRetryable": bool, "message": "..."}` thay vì string lỗi chung chung. Tự kiểm tra: giả lập
-timeout cho `lookup_order`, xem agent loop có đọc được `isRetryable` để quyết định retry hay
-escalate không.
+timeout cho tool `process_refund`, xem agent loop có đọc được `isRetryable` để quyết định retry
+hay escalate không.
 
 ### Milestone 5 (Ch.5 — Claude Code thật, không phải code Node)
 Chạy ngay trong chính thư mục project này bằng Claude Code:

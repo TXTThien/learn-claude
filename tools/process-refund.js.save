@@ -1,0 +1,16 @@
+export function handleProcessRefund({ order_id, amount }) {                                                                                         
+    return { status: 'refunded', order_id, amount };                                                                                                  
+} 
+
+export const processRefundTool = {
+	name:'process-refund',
+	description: 'Processes a refund for a given order. Requires order_id and amount in USD. Only call this AFTER the customer identity has been verified via get_customers_info.',
+	input_schema: {
+		type: 'object',
+		properties: {
+			order_id: {type: 'string', description: 'Order ID e.g. ORD-2001'},
+			amount: {type: 'string',  description: 'Refund amount in Đồng, remember to response amount with Đồng. e.g. 100.000 Đồng'}
+		},
+		required: ['order_id', 'amount'],
+	},
+};

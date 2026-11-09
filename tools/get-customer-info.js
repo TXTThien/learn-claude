@@ -1,11 +1,12 @@
 import { customers } from '../data/customers.js';
+import { toolError } from './errors.js';
 
 export function handleGetCustomer({ email, customer_id, name }) {
     let found;
     if (email) found = customers[email];
     else if (customer_id) found = Object.values(customers).find(c => c.customer_id === customer_id);
     else if (name) found = Object.values(customers).find(c => c.name.toLowerCase() === name.toLowerCase());
-    return found ?? { error: 'not_found' };     
+    return found ?? toolError('business', false, 'No customer found matching the given identifier.');
   }
 export const tools = [
  {
